@@ -36,9 +36,6 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div className="grid-cols-3">
-          <img src="https://source.unsplash.com/random" alt="splash" />
-        </div>
       </div>
     </div>
   );
