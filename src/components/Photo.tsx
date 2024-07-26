@@ -7,6 +7,8 @@ interface Photo {
     regular: string;
   };
   alt_description: string;
+  likes: string;
+  downloads: string;
 }
 
 const Photo = () => {
@@ -17,7 +19,7 @@ const Photo = () => {
     const fetchPhoto = async () => {
       try {
         console.log(apiKey);
-        const response = await axios.get<Photo[]>(
+        const photoBatch1 = await axios.get<Photo[]>(
           "https://api.unsplash.com/photos/random?count=50",
           {
             headers: {
@@ -25,8 +27,17 @@ const Photo = () => {
             },
           }
         );
-        console.log(response.data);
-        setPhoto(response.data);
+        const photoBatch2 = await axios.get<Photo[]>(
+          "https://api.unsplash.com/photos/random?count=50",
+          {
+            headers: {
+              Authorization: `Client-ID ${apiKey}`,
+            },
+          }
+        );
+
+        const allPhotos = [...photoBatch1.data, ...photoBatch2.data]
+        setPhoto(allPhotos);
       } catch (error) {
         console.error("Error fetching photo:", error);
       }
@@ -50,13 +61,20 @@ const Photo = () => {
         {photoColumns.map((column, columnIndex) => (
           <div key={columnIndex} className="flex flex-col space-y-4">
             {column.map((photo, photoIndex) => (
-              <img
-                key={photoIndex}
-                className="w-full h-auto"
-                src={photo.urls.regular}
-                alt={photo.alt_description || "Random photo"}
-              />
+              <div>
+                <img
+                  key={photoIndex}
+                  className="w-full h-auto"
+                  src={photo.urls.regular}
+                  alt={photo.alt_description || "Random photo"}
+                />
+                <p>Views:{photo.likes}</p>
+                <p>Dns{photo.downloads}</p>
+
+              </div>
+              
             ))}
+            
           </div>
         ))}
       </div>
