@@ -24,6 +24,14 @@
   background-image: url('../beach.png');
 }
 
+.op-main:hover .op-city {
+  opacity: 90;
+}
+
+.bg-w {
+  background: white;
+}
+
 ::before,
 ::after {
   --tw-content: '';

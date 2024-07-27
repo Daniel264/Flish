@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "../assets/tailwind.css";
 import axios from "axios";
+import download from "../download.png";
+import like from "../love.png";
 
 interface Photo {
   urls: {
@@ -9,6 +11,13 @@ interface Photo {
   alt_description: string;
   likes: string;
   downloads: string;
+  tags: string;
+  description: string;
+  user: {
+    name: string;
+    username: string;
+  };
+  link: string;
 }
 
 const Photo = () => {
@@ -36,7 +45,7 @@ const Photo = () => {
           }
         );
 
-        const allPhotos = [...photoBatch1.data, ...photoBatch2.data]
+        const allPhotos = [...photoBatch1.data, ...photoBatch2.data];
         setPhoto(allPhotos);
       } catch (error) {
         console.error("Error fetching photo:", error);
@@ -50,36 +59,43 @@ const Photo = () => {
 
   photo.forEach((photos, index) => {
     photoColumns[index % columns].push(photos);
-  })
+  });
 
   return (
     <>
-    {photo.length === 0 ? (
-      <p>Loading Photos...</p>
-    ) : (
-      <div className="grid grid-cols-3 gap-4">
-        {photoColumns.map((column, columnIndex) => (
-          <div key={columnIndex} className="flex flex-col space-y-4">
-            {column.map((photo, photoIndex) => (
-              <div>
-                <img
-                  key={photoIndex}
-                  className="w-full h-auto"
-                  src={photo.urls.regular}
-                  alt={photo.alt_description || "Random photo"}
-                />
-                <p>Views:{photo.likes}</p>
-                <p>Dns{photo.downloads}</p>
-
-              </div>
-              
-            ))}
-            
-          </div>
-        ))}
-      </div>
-    )}
-  </>
+      {photo.length === 0 ? (
+        <p>Loading Photos...</p>
+      ) : (
+        <div className="grid grid-cols-3 gap-4">
+          {photoColumns.map((column, columnIndex) => (
+            <div key={columnIndex} className="flex flex-col space-y-4">
+              {column.map((photo, photoIndex) => (
+                <div className="op-main relative hover:cursor-zoom-in hover:brightness-90 hover:backdrop-blur-sm">
+                  <img
+                    key={photoIndex}
+                    className="w-full h-auto"
+                    src={photo.urls.regular}
+                    alt={photo.alt_description || "Random photo"}
+                  />
+                  <div className="op-city flex absolute top-0 right-0 opacity-0 py-1.5 px-1.5">
+                    <button className="bg-w rounded-md py-1 px-2 m-1">
+                      <img src={download} alt="" className="h-6" />
+                    </button>
+                    <button className="bg-w rounded-md py-1 px-2 m-1">
+                      <a href="http://unsplash.com/photos/download">
+                        <img src={like} alt="" className="h-6" />
+                      </a>
+                    </button>
+                    
+                  </div>
+                  <p className="op-city absolute bottom-0 left-6 text-white opacity-0">{photo.user.name}</p>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 
