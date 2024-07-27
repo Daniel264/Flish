@@ -66,7 +66,7 @@ const Photo = () => {
       {photo.length === 0 ? (
         <p>Loading Photos...</p>
       ) : (
-        <div className="grid grid-cols-3 gap-4">
+        <div className="grid grid-cols-3 gap-4 ">
           {photoColumns.map((column, columnIndex) => (
             <div key={columnIndex} className="flex flex-col space-y-4">
               {column.map((photo, photoIndex) => (

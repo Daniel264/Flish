@@ -38,14 +38,18 @@ const MidDiv = () => {
 
   return (
     <>
-        <div className="flex flex-row">
-          <div><h1 className="text-5xl font-semibold">Unsplash</h1>
-          <p>The Internet's source for visuals.</p>
-          <p>Powered by creators everywhere</p>
-          
+        <div className="flex flex-row px-14">
+          <div className='w-2/4 mt-28'><h1 className="text-5xl font-semibold font-serif">Flish</h1>
+          <p className='text-2xl'>The Internet's source for visuals.</p>
+          <p className='text-2xl'>Powered by creators everywhere</p>
+          <input
+                placeholder="search for images and illustrations"
+                className="bg-gray-200 py-3 px-48 rounded-lg "
+                type="text"
+              />
           </div>
-          <div>
-            {photo.length > 0 && <img className='h-64 w-64 rounded-lg' src={photo[0].urls.regular} />}
+          <div className='mt-14'>
+            {photo.length > 0 && <img className='h-64 w-72 rounded-lg' src={photo[0].urls.regular} />}
           </div>
           <div></div>
         </div>

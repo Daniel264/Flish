@@ -3,7 +3,7 @@ import "../assets/tailwind.css";
 const Header = () => {
   return (
     <div className="">
-        <div className="bg-image max-h-fit pb-40 bg-no-repeat bg-cover bg-center flex flex-col justify-between">
+        <div className="px-10 bg-image max-h-fit pb-40 bg-no-repeat bg-cover bg-center flex flex-col justify-between">
           <div className=" flex justify-between p-5 text-lg font-normal">
             <p className="text-5xl text-amber-900 font-serif">FLISH</p>
             <div className="flex flex-row space-x-10">
