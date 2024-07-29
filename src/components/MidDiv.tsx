@@ -55,8 +55,8 @@ const MidDiv = () => {
             No Ads</div>
 
           </div>
-          <div className=''>
-              
+          <div className='border border-black-500 border-1 ml-14 mt-14 rounded-lg h-72 p-5 w-72'>
+              <p className='font-bold'>Collections</p>
           </div>
         </div>
     </>
