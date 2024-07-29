@@ -10,6 +10,7 @@ interface Photo {
   };
   alt_description: string;
   likes: string;
+  id: string;
   downloads: string;
   tags: string;
   description: string;
@@ -54,6 +55,14 @@ const Photo = () => {
     fetchPhoto();
   }, [apiKey]);
 
+  const handleDownload = (url: string, filename: string) => {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   const columns = 3;
   const photoColumns: Photo[][] = Array.from({ length: columns }, () => []);
 
@@ -79,16 +88,22 @@ const Photo = () => {
                   />
                   <div className="op-city flex absolute top-0 right-0 opacity-0 py-1.5 px-1.5">
                     <button className="bg-w rounded-md py-1 px-2 m-1">
-                      <img src={download} alt="" className="h-6" />
+                      <img
+                        onClick={() =>
+                          handleDownload(photo.urls.regular, `${photo.id}.jpg`)
+                        }
+                        src={download}
+                        alt=""
+                        className="h-6"
+                      />
                     </button>
                     <button className="bg-w rounded-md py-1 px-2 m-1">
-                      <a href="http://unsplash.com/photos/download">
-                        <img src={like} alt="" className="h-6" />
-                      </a>
+                      <img src={like} alt="" className="h-6" />
                     </button>
-                    
                   </div>
-                  <p className="op-city absolute bottom-0 left-6 text-white opacity-0">{photo.user.name}</p>
+                  <p className="op-city absolute bottom-0 left-6 text-white opacity-0">
+                    {photo.user.name}
+                  </p>
                 </div>
               ))}
             </div>
